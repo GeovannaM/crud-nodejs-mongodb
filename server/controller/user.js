@@ -91,18 +91,15 @@ exports.update = function (req, res) {
  * Function to delete the user from collection.
  */
 exports.delete = function (req, res) {
-
     var params = req.params || {};
-    
     var query = {
         username: params.username
     };
- 
 
-     if (!query) {
-       res.status(400).send('Bad Request');
-       return;
-     }
+    if (!query) {
+        res.status(400).send('Bad Request');
+        return;
+    }
 
     userService.deleteUser(query, function (error, response) {
         if (error) {
@@ -111,7 +108,7 @@ exports.delete = function (req, res) {
         }
         if (response) {
             if (response.n === 1 && response.ok === 1) {
-                res.status(202).send("Deletado com sucesso" + query.username);
+                res.status(202).send("Deletado com sucesso: " + query.username);
             }
             if (response.n === 0 && response.ok === 1) {
                 res.status(204).send({
